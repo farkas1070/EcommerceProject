@@ -4,7 +4,15 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        custom: ['Montserrat', 'sans-serif'],
+        custom2:['Vina Sans', 'sans-serif'],
+        custom3: ['Raleway', 'sans-serif'],
+        
+
+      },
+    },
   },
   plugins: [],
 }

@@ -5,10 +5,21 @@ export interface IAppProps {}
 export default function App(props: IAppProps) {
   return (
     <section className="p-20 space-y-8">
-      <div className="grid container  lg:grid-cols-5 md:grid-cols-2 justify-center gap-4">
+      <div className="w-full flex flex-col items-center">
+        <h1
+          data-aos="fade-up"
+          className="text-6xl pt-8 lg:pt-0 mt-[15px] mb-2 text-black font-custom3"
+        >
+          Find Any Item You Like
+        </h1>
+        <h2 data-aos="fade-up" className="text-lg text-gray-500 mb-[60px]">
+          Subtitle text goes here
+        </h2>
+      </div>
+      <div data-aos="fade-up" className="grid container  lg:grid-cols-5 md:grid-cols-3 justify-center gap-4">
 
           
-          {Array.from({ length: 5 }, (_, index) => (
+          {Array.from({ length: 10 }, (_, index) => (
        <div className="grid justify-center">
            
        <div className="group  border-gray-100/30 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md">
