@@ -22,7 +22,7 @@ export default function App(props: IAppProps) {
           {Array.from({ length: 10 }, (_, index) => (
        <div className="grid justify-center">
            
-       <div className="group  border-gray-100/30 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md">
+       <div className="group  border-gray-100/30 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-[#0e0e0e] shadow-md">
          <a
            className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
            href="#"
@@ -72,7 +72,7 @@ export default function App(props: IAppProps) {
            </div>
            <a
              href="#"
-             className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
+             className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-gray-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
            >
              <svg
                xmlns="http://www.w3.org/2000/svg"

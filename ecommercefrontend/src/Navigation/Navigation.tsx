@@ -17,7 +17,7 @@ export default function Navigation (props: IAppProps) {
     <Route path="/Login" element={<Login />}></Route>
     <Route path="/Register" element={<Register />}></Route>
     <Route path="/Home" element={<Home />}></Route>
-    <Route path="/Home/Description" element={<ItemDescription />}></Route>
+    <Route path="/Home/Shoes/:shoeID" element={<ItemDescription />}></Route>
     <Route path="/Home/Cart" element={<Cart />}></Route>
     
    

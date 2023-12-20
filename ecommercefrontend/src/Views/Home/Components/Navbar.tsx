@@ -1,6 +1,7 @@
 import * as React from "react";
 import Box from "../../../Assets/Photos/shoebox.png";
 import {Link} from "react-router-dom"
+import { Badge} from "@material-tailwind/react";
 export interface IAppProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -49,14 +50,14 @@ const App: React.FC<IAppProps> = ({ setIsOpen }) => {
           </h2>
           <ul className="flex flex-col items-center sm:flex-row">
             <Link to="">
-            <li className="font-bold sm:mr-12 mt-1">Orders</li>
+            <li className="text-gray-800 sm:mr-12 mt-1">Sales</li>
             </Link>
             <Link to="">
-            <li className="text-gray-800 sm:mr-12 mt-1">Teams</li>
+            <li className="text-gray-800 sm:mr-12 mt-1">All Items</li>
             </Link>
 
             <Link to="">
-            <li className="text-gray-800 sm:mr-12 mt-1">Customers</li>
+            <li className="text-gray-800 sm:mr-12 mt-1">Brands</li>
             </Link>
           </ul>
           <ul className="mt-4 flex sm:mt-0">
@@ -76,6 +77,7 @@ const App: React.FC<IAppProps> = ({ setIsOpen }) => {
                 />
               </svg>
             </button>
+            <Badge content="5" placement="bottom-end" className="mb-3 ml-3">
             <Link to="/Home/Cart" className="ml-6 flex h-8 w-8 cursor-pointer items-center justify-center rounded-xl  text-gray-600 hover:text-black hover:shadow">
               <svg
                 width="800px"
@@ -103,6 +105,7 @@ const App: React.FC<IAppProps> = ({ setIsOpen }) => {
                 />
               </svg>
             </Link>
+            </Badge>
             <button
               onClick={() => {
                 setIsOpen(true);

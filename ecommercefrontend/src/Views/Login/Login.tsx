@@ -1,13 +1,43 @@
-import * as React from "react";
+import React,{useState,ChangeEvent,FormEvent,useContext} from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-export interface IAppProps {}
-
-export default function Login(props: IAppProps) {
+import axios from "axios";
+import { userContext } from "../../Context/GlobalContext";
+export default function Login() {
   const navigate = useNavigate();
+  const [user, setUser] = useContext(userContext);
+  const [formData, setFormData] = useState({
+    
+    Email: '',
+    passwordHash: '',
+  });
   const handleNavigate=()=>{
     navigate("/Home");
   }
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+
+  const handleLogin = async (e: FormEvent) => {
+    e.preventDefault();
+  
+    try {
+      const response = await axios.post('https://localhost:7212/api/User/login', {
+        Email: formData.Email,
+        PasswordHash: formData.passwordHash,
+      });
+      setUser(response.data);
+      
+      handleNavigate();
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        console.error('Login Error:', error.response.data);
+      } else {
+        console.error('An error occurred during login:', error);
+      }
+    }
+  };
 
   return (
     <div className="flex flex-wrap">
@@ -112,16 +142,17 @@ export default function Login(props: IAppProps) {
                     Please sign-in to access your account
                   </p>
 
-                  <form id="" className="mb-4" action="#" method="POST">
+                  <form onSubmit={handleLogin}  className="mb-4" action="#" method="POST">
                     <div className="mb-4">
                       <label className="mb-2 inline-block text-xs font-medium uppercase text-gray-700">
-                        Email or Username
+                        Email
                       </label>
                       <input
                         type="text"
+                        onChange={handleInputChange}
                         className="block w-full cursor-text appearance-none rounded-md border border-gray-400 bg--100 py-2 px-3 text-sm outline-none focus:border-indigo-500 focus:bg-white focus:text-gray-600 focus:shadow"
-                        id="email"
-                        name="email-username"
+                     
+                        name="Email"
                         placeholder="Enter your email or username"
                       />
                     </div>
@@ -139,10 +170,11 @@ export default function Login(props: IAppProps) {
                       </div>
                       <div className="relative flex w-full flex-wrap items-stretch">
                         <input
-                          type="password"
-                          id="password"
+                        onChange={handleInputChange}
+                          type="passwordHash"
+                         
                           className="relative block flex-auto cursor-text appearance-none rounded-md border border-gray-400 bg--100 py-2 px-3 text-sm outline-none focus:border-indigo-500 focus:bg-white focus:text-gray-600 focus:shadow"
-                          name="password"
+                          name="passwordHash"
                           placeholder="············"
                         />
                       </div>
@@ -150,6 +182,7 @@ export default function Login(props: IAppProps) {
                     <div className="mb-4">
                       <div className="block">
                         <input
+                        
                           className="mt-1 mr-2 h-5 w-5 appearance-none rounded border border-gray-300 bg-contain bg-no-repeat align-top text-black shadow checked:bg-indigo-500 focus:border-indigo-500 focus:shadow"
                           type="checkbox"
                           id="remember-me"
@@ -157,7 +190,7 @@ export default function Login(props: IAppProps) {
                             backgroundImage:
                               'url(\'data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"%3e%3cpath fill="none" stroke="%23fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 10l3 3l6-6"/%3e%3c/svg%3e\')',
                           }}
-                          checked
+                          
                         />
                         <label className="inline-block"> Remember Me </label>
                       </div>
@@ -165,9 +198,9 @@ export default function Login(props: IAppProps) {
                     <div className="mb-4">
                       
                       <button
-                      onClick={()=>{handleNavigate()}}
+                      type="submit"
                         className="grid w-full cursor-pointer select-none rounded-md border border-indigo-500 bg-indigo-500 py-2 px-5 text-center align-middle text-sm text-white shadow hover:border-indigo-600 hover:bg-indigo-600 hover:text-white focus:border-indigo-600 focus:bg-indigo-600 focus:text-white focus:shadow-none"
-                        type="submit"
+                        
                       >
                         Sign in
                       </button>

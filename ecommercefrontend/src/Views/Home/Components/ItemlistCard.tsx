@@ -1,26 +1,29 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { Shoe } from '../../../Types/ShoeType';
 export interface IAppProps {
-    name: string;
-    isOnsale: boolean;
-    price: string;
-    newPrice: string;
-    rating: number;
-    img:string;
+  // Define the shape of your Shoe object
+  shoeID: number;
+  brandName: string;
+  productName: string;
+  imageUrl: string;
+  price: number;
+  isOnSale: boolean;
+  newPrice: number | null;
 }
 
-const App: React.FC<IAppProps> = ({ name,isOnsale,price,newPrice,rating,img }) => {
+const App: React.FC<IAppProps> = ({ brandName,imageUrl,productName,price,isOnSale,newPrice,shoeID }) => {
   return (
-    <Link to='/Home/Description'>
+    <Link to={`/Home/Shoes/${shoeID}`}>
     <article className="relative h-full flex flex-col transition-transform transform-gpu hover:scale-105 ">
     <div className="aspect-square overflow-hidden">
       <img
         className="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"
-        src={img}
+        src={imageUrl}
         alt=""
       />
     </div>
-    {isOnsale && (
+    {isOnSale && (
       <div className="absolute top-0 m-1 rounded-full bg-white">
         <p className="rounded-full bg-black p-1 text-[10px] font-bold uppercase tracking-wide text-white sm:py-1 sm:px-3">
           Sale
@@ -32,7 +35,7 @@ const App: React.FC<IAppProps> = ({ name,isOnsale,price,newPrice,rating,img }) =
       <div className="flex flex-col">
         <h3 className="text-xs font-semibold sm:text-sm md:text-base">
           <a href="#" title="" className="">
-            {name}
+            {productName}
             <span className="absolute" aria-hidden="true"></span>
           </a>
         </h3>
@@ -96,7 +99,7 @@ const App: React.FC<IAppProps> = ({ name,isOnsale,price,newPrice,rating,img }) =
       </div>
 
       <div className="text-right">
-        {isOnsale && (
+        {isOnSale && (
           <del className="mt-px text-xs font-semibold text-gray-600 sm:text-sm">
             ${price}
           </del>

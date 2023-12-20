@@ -1,14 +1,8 @@
 import * as React from "react";
 import Card from "./ItemlistCard";
+import { Shoe } from '../../../Types/ShoeType';
 export interface IAppProps {
-  itemList: Array<{
-    name: string;
-    img: string;
-    rating: number;
-    price: string;
-    isOnsale: boolean;
-    newPrice: string;
-  }>;
+  itemList: Shoe[];
 }
 
 const App: React.FC<IAppProps> = ({ itemList }) => {
@@ -27,12 +21,13 @@ const App: React.FC<IAppProps> = ({ itemList }) => {
         {itemList.map((item) => {
           return (
             <Card
-              name={item.name}
-              isOnsale={item.isOnsale}
+              brandName={item.brandName}
+              isOnSale={item.isOnSale}
+              productName={item.productName}
               price={item.price}
               newPrice={item.newPrice}
-              rating={item.rating}
-              img={item.img}
+              shoeID={item.shoeID}
+              imageUrl={item.imageUrl}
             ></Card>
           );
         })}
