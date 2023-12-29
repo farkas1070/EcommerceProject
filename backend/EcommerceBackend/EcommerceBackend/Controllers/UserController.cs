@@ -43,7 +43,7 @@ namespace EcommerceBackend.Controllers
             // Add the new user to the database
             _dbContext.Users.Add(newUser);
             await _dbContext.SaveChangesAsync();
-
+            await Task.Delay(5000);
             return Ok(new { Message = "User registered successfully." });
         }
 
@@ -54,7 +54,7 @@ namespace EcommerceBackend.Controllers
         {
             var user = await _dbContext.Users
                 .FirstOrDefaultAsync(u => u.PasswordHash == request.PasswordHash && u.Email == request.Email);
-
+            await Task.Delay(5000);
             if (user == null)
             {
                 // User not found
@@ -69,7 +69,7 @@ namespace EcommerceBackend.Controllers
             }
 
             // TODO: Generate and return an authentication token (you may use a library like JWT)
-
+            
             return Ok(user);
         }
         // You should implement a proper password hashing function, like bcrypt

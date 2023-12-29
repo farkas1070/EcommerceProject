@@ -58,6 +58,39 @@ namespace EcommerceBackend.Controllers
 
             return Ok(new { Message = "Item added to the cart successfully." });
         }
+        [HttpDelete("remove")]
+        public async Task<ActionResult> RemoveFromCart([FromBody] Cart request)
+        {
+            try
+            {
+                var existingCartItem = _dbContext.Cart
+                    .FirstOrDefault(c => c.UserID == request.UserID && c.ShoeID == request.ShoeID);
+
+                if (existingCartItem != null)
+                {
+                    if (existingCartItem.Quantity > 1)
+                    {
+                        existingCartItem.Quantity -= 1;
+                    }
+                    else
+                    {
+                        _dbContext.Cart.Remove(existingCartItem);
+                    }
+
+                    await _dbContext.SaveChangesAsync();
+                    return Ok(new { Message = "Item removed from the cart successfully." });
+                }
+                else
+                {
+                    return NotFound(new { Message = "Item not found in the cart." });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                return StatusCode(500, new { Message = "Internal Server Error" });
+            }
+        }
     }
 
 

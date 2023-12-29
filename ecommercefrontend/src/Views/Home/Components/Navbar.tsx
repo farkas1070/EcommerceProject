@@ -1,12 +1,17 @@
-import * as React from "react";
+import  React,{useContext,useEffect} from "react";
 import Box from "../../../Assets/Photos/shoebox.png";
 import {Link} from "react-router-dom"
 import { Badge} from "@material-tailwind/react";
+import { cartContext } from "../../../Context/GlobalContext";
 export interface IAppProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const App: React.FC<IAppProps> = ({ setIsOpen }) => {
+  const [cartData, setCartData] = useContext(cartContext)
+  const cartQuantity:number = cartData.reduce((sum, el) => sum += el.quantity, 0)
+
+  console.log(cartQuantity)
   return (
     <header className=" shadow">
       <div className="relative flex max-w-screen-xl flex-col justify-center overflow-hidden px-4 py-4 sm:mx-auto sm:flex-row">
@@ -77,7 +82,7 @@ const App: React.FC<IAppProps> = ({ setIsOpen }) => {
                 />
               </svg>
             </button>
-            <Badge content="5" placement="bottom-end" className="mb-3 ml-3">
+            <Badge content={cartQuantity} placement="bottom-end" className="mb-3 ml-3">
             <Link to="/Home/Cart" className="ml-6 flex h-8 w-8 cursor-pointer items-center justify-center rounded-xl  text-gray-600 hover:text-black hover:shadow">
               <svg
                 width="800px"
