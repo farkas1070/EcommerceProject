@@ -69,22 +69,7 @@ const Navbar = () => {
           Register
         </Link>
       </li>
-      <li>
-        <Link
-          to="/About"
-          className="text-white font-custom text-lg  duration-100 hover:text-orange-500"
-        >
-          About
-        </Link>
-      </li>
-      <li>
-        <Link
-          to="/Items"
-          className="text-white font-custom text-lg  duration-100 hover:text-orange-500"
-        >
-          Items
-        </Link>
-      </li>
+      
     </ul>
   </nav>
 </div>
